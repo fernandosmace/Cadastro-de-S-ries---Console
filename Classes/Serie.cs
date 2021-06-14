@@ -10,7 +10,7 @@ namespace DIO.Series.Classes
         private string Description { get; set; }
         private int Year { get; set; }
 
-        public Serie(Guid id, Gender gender, string title, string description, int year)
+        public Serie(int id, Gender gender, string title, string description, int year)
         {
             this.Id = id;
             this.Gender = gender;
@@ -36,7 +36,7 @@ namespace DIO.Series.Classes
             return this.Title;
         }
 
-        public Guid retornaId()
+        public int retornaId()
         {
             return this.Id;
         }
