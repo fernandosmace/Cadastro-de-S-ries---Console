@@ -18,5 +18,17 @@ namespace DIO.Series.Classes
             this.Descricao = Descricao;
             this.Ano = Ano;
         }
+
+        public override string ToString()
+        {
+            string retorno = "";
+
+            retorno += "Gênero: " + this.Genero + Environment.NewLine;
+            retorno += "Título: " + this.Titulo + Environment.NewLine;
+            retorno += "Descrição: " + this.Descricao + Environment.NewLine;
+            retorno += "Ano de Início: " + this.Ano + Environment.NewLine;
+
+            return retorno;
+        }
     }
 }
