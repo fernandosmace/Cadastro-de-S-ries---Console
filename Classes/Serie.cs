@@ -30,5 +30,15 @@ namespace DIO.Series.Classes
 
             return retorno;
         }
+
+        public string retornaTitulo()
+        {
+            return this.Titulo;
+        }
+
+        public Guid retornaId()
+        {
+            return this.Id;
+        }
     }
 }
