@@ -5,35 +5,35 @@ namespace DIO.Series.Classes
 {
     public class Serie : Entidadebase
     {
-        private Genero Genero { get; set; }
-        private string Titulo { get; set; }
-        private string Descricao { get; set; }
-        private int Ano { get; set; }
+        private Gender Gender { get; set; }
+        private string Title { get; set; }
+        private string Description { get; set; }
+        private int Year { get; set; }
 
-        public Serie(Guid Id, Genero genero, string Titulo, string Descricao, int Ano)
+        public Serie(Guid id, Gender gender, string title, string description, int year)
         {
-            this.Id = Id;
-            this.Genero = Genero;
-            this.Titulo = Titulo;
-            this.Descricao = Descricao;
-            this.Ano = Ano;
+            this.Id = id;
+            this.Gender = gender;
+            this.Title = title;
+            this.Description = description;
+            this.Year = year;
         }
 
         public override string ToString()
         {
             string retorno = "";
 
-            retorno += "Gênero: " + this.Genero + Environment.NewLine;
-            retorno += "Título: " + this.Titulo + Environment.NewLine;
-            retorno += "Descrição: " + this.Descricao + Environment.NewLine;
-            retorno += "Ano de Início: " + this.Ano + Environment.NewLine;
+            retorno += "Gênero: " + this.Gender + Environment.NewLine;
+            retorno += "Título: " + this.Title + Environment.NewLine;
+            retorno += "Descrição: " + this.Description + Environment.NewLine;
+            retorno += "Year de Início: " + this.Year + Environment.NewLine;
 
             return retorno;
         }
 
-        public string retornaTitulo()
+        public string retornaTitle()
         {
-            return this.Titulo;
+            return this.Title;
         }
 
         public Guid retornaId()
