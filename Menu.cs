@@ -87,5 +87,22 @@ namespace DIO.Series
 
             Menu.menu();
         }
+
+        private static void listSeries()
+        {
+            Console.WriteLine("Opção 1 - Listar séries");
+
+            var list = repository.List();
+
+            if (list.Count == 0)
+            {
+                Console.WriteLine("   | Nenhuma série cadastrada |");
+            }
+
+            foreach (var serie in list)
+            {
+                Console.WriteLine("ID {0}: - {1}", serie.returnId(), serie.returnTitle());
+            }
+        }
     }
 }
