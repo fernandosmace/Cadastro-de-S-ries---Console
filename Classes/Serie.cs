@@ -42,5 +42,10 @@ namespace DIO.Series.Classes
         {
             return this.Id;
         }
+
+        public void Delete()
+        {
+            this.Status = true;
+        }
     }
 }
