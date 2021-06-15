@@ -9,6 +9,7 @@ namespace DIO.Series.Classes
         private string Title { get; set; }
         private string Description { get; set; }
         private int Year { get; set; }
+        private bool Status { get; set; }
 
         public Serie(int id, Gender gender, string title, string description, int year)
         {
@@ -17,6 +18,7 @@ namespace DIO.Series.Classes
             this.Title = title;
             this.Description = description;
             this.Year = year;
+            this.Status = false;
         }
 
         public override string ToString()
