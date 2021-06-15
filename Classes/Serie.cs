@@ -33,12 +33,12 @@ namespace DIO.Series.Classes
             return retorno;
         }
 
-        public string retornaTitle()
+        public string returnTitle()
         {
             return this.Title;
         }
 
-        public int retornaId()
+        public int returnId()
         {
             return this.Id;
         }
