@@ -1,6 +1,3 @@
-
-
-using System;
 using System.Collections.Generic;
 
 namespace DIO.Series.Interfaces
@@ -8,11 +5,11 @@ namespace DIO.Series.Interfaces
     public interface IRepository<T>
     {
         List<T> List();
-        T GetSerie(Guid id);
+        T GetSerieById(int id);
         void Insert(T entity);
-        void Delete(Guid id);
-        void Update(Guid id, T entity);
-        Guid NextId();
+        void Delete(int id);
+        void Update(int id, T entity);
+        int NextId();
 
     }
 }
