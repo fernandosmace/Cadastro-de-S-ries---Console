@@ -42,6 +42,10 @@ namespace DIO.Series.Classes
         {
             return this.Id;
         }
+        public bool returnStatus()
+        {
+            return this.Status;
+        }
 
         public void Delete()
         {
