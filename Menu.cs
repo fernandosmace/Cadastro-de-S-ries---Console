@@ -108,20 +108,29 @@ namespace DIO.Series
                 return;
             }
 
-            Console.WriteLine("----------------------------------------------------------");
-            Console.WriteLine("|  ID  |  Título                                         |");
-            Console.WriteLine("----------------------------------------------------------");
+            Console.WriteLine("--------------------------------------------------------------------------");
+            Console.WriteLine("|  ID  |  Título                                         |  Status       |");
+            Console.WriteLine("--------------------------------------------------------------------------");
             foreach (var serie in list)
             {
+                string status = "Ativa";
+
+                if (serie.returnStatus())
+                {
+                    status = "Excluída";
+                }
+
                 Console.Write("|  ");
                 Console.Write(serie.returnId().ToString().PadRight(4, ' '));
                 Console.Write("|  ");
                 Console.Write(serie.returnTitle().ToString().PadRight(47, ' '));
+                Console.Write("|  ");
+                Console.Write(status.PadRight(13, ' '));
                 Console.Write("|");
                 Console.WriteLine("");
                 // Console.WriteLine("{0} | {1}", serie.returnId(), serie.returnTitle());
             }
-            Console.WriteLine("----------------------------------------------------------");
+            Console.WriteLine("--------------------------------------------------------------------------");
         }
 
         private static void insertSerie()
