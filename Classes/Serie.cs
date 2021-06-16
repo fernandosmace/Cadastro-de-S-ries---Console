@@ -28,6 +28,7 @@ namespace DIO.Series.Classes
             retorno += "Título: " + this.Title + Environment.NewLine;
             retorno += "Descrição: " + this.Description + Environment.NewLine;
             retorno += "Year de Início: " + this.Year + Environment.NewLine;
+            retorno += "Status: " + this.Status + Environment.NewLine;
 
             return retorno;
         }
