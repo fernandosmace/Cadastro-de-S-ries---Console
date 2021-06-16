@@ -94,7 +94,7 @@ namespace DIO.Series
         {
             Console.Clear();
             Console.WriteLine("");
-            Console.WriteLine("Opção 1 - Listar séries");
+            Console.WriteLine("Opção 1 - Listar séries ");
             Console.WriteLine("");
 
             var list = repository.List();
@@ -104,12 +104,23 @@ namespace DIO.Series
                 Console.WriteLine("   ----------------------------");
                 Console.WriteLine("   | Nenhuma série cadastrada |");
                 Console.WriteLine("   ----------------------------");
+                return;
             }
 
+            Console.WriteLine("----------------------------------------------------------");
+            Console.WriteLine("|  ID  |  Título                                         |");
+            Console.WriteLine("----------------------------------------------------------");
             foreach (var serie in list)
             {
-                Console.WriteLine("ID {0}: - {1}", serie.returnId(), serie.returnTitle());
+                Console.Write("|  ");
+                Console.Write(serie.returnId().ToString().PadRight(4, ' '));
+                Console.Write("|  ");
+                Console.Write(serie.returnTitle().ToString().PadRight(47, ' '));
+                Console.Write("|");
+                Console.WriteLine("");
+                // Console.WriteLine("{0} | {1}", serie.returnId(), serie.returnTitle());
             }
+            Console.WriteLine("----------------------------------------------------------");
         }
 
         private static void insertSerie()
