@@ -24,7 +24,8 @@ namespace DIO.Series
                 Console.WriteLine("   2 - Inserir nova série");
                 Console.WriteLine("   3 - Atualizar série");
                 Console.WriteLine("   4 - Excluir série");
-                Console.WriteLine("   5 - Visualizar série");
+                Console.WriteLine("   5 - Restaurar série");
+                Console.WriteLine("   6 - Visualizar série");
                 Console.WriteLine("   0 - Sair.");
                 Console.WriteLine();
                 Console.Write("--> ");
@@ -53,6 +54,10 @@ namespace DIO.Series
                         retornarMenuPrincipal();
                         break;
                     case "5":
+                        recoverSerie();
+                        retornarMenuPrincipal();
+                        break;
+                    case "6":
                         viewSerie();
                         retornarMenuPrincipal();
                         break;
@@ -402,7 +407,7 @@ namespace DIO.Series
 
             Console.Clear();
             Console.WriteLine("");
-            Console.WriteLine("Opção 4 - Atualizar série");
+            Console.WriteLine("Opção 4 - Deletar série");
             Console.WriteLine("");
 
             do
@@ -466,6 +471,78 @@ namespace DIO.Series
             } while (confirmDelete.Equals(""));
         }
 
+        private static void recoverSerie()
+        {
+            int insertedId = -1;
+
+
+            Console.Clear();
+            Console.WriteLine("");
+            Console.WriteLine("Opção 5 - Restaurar série");
+            Console.WriteLine("");
+
+            do
+            {
+                Console.WriteLine("");
+                Console.WriteLine("");
+                Console.WriteLine("Informe o id da série que deseja restaurar.");
+                Console.Write("--> ");
+
+                int.TryParse(Console.ReadLine(), out insertedId);
+
+
+                if (insertedId < 0 || insertedId > repository.NextId() - 1 || !repository.GetSerieById(insertedId).returnStatus())
+                {
+                    insertedId = -1;
+
+                    Console.WriteLine("");
+                    Console.WriteLine("");
+                    Console.WriteLine("ATENÇÃO: ID não localizado!");
+                    return;
+                }
+
+            } while (insertedId == -1);
+
+            string confirmRecover = "";
+
+            do
+            {
+                Console.WriteLine("");
+                Console.WriteLine("ATENÇÃO: Deseja mesmo restaurar esta série? 1 - SIM | 2 - NÃO");
+                Console.Write("--> ");
+                confirmRecover = Console.ReadLine();
+
+                switch (confirmRecover)
+                {
+                    case "1":
+                        try
+                        {
+                            repository.Recover(insertedId);
+                        }
+                        catch (System.Exception e)
+                        {
+                            throw new Exception(e.Message);
+                        }
+
+                        Console.WriteLine("");
+                        Console.WriteLine("   ------------------------------");
+                        Console.WriteLine("   | Série restaurada com sucesso |");
+                        Console.WriteLine("   ------------------------------");
+
+                        break;
+                    case "2":
+                        Console.WriteLine("");
+                        Console.WriteLine("Operação cancelada!");
+                        break;
+
+                    default:
+                        confirmRecover = "";
+                        break;
+                }
+            } while (confirmRecover.Equals(""));
+
+        }
+
         private static void viewSerie()
         {
             int insertedId = -1;
@@ -473,7 +550,7 @@ namespace DIO.Series
 
             Console.Clear();
             Console.WriteLine("");
-            Console.WriteLine("Opção 5 - Visualizar série");
+            Console.WriteLine("Opção 6 - Visualizar série");
             Console.WriteLine("");
 
             do

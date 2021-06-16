@@ -13,6 +13,10 @@ namespace DIO.Series
         {
             listSeries[id].Delete();
         }
+        public void Recover(int id)
+        {
+            listSeries[id].Recover();
+        }
 
         public Serie GetSerieById(int id)
         {

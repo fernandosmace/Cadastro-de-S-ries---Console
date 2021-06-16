@@ -58,5 +58,10 @@ namespace DIO.Series.Classes
         {
             this.Status = true;
         }
+
+        public void Recover()
+        {
+            this.Status = false;
+        }
     }
 }
