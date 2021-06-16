@@ -8,6 +8,7 @@ namespace DIO.Series
     {
 
         static SeriesRepository repository = new SeriesRepository();
+
         public static void menu()
         {
             Console.Clear();
@@ -44,15 +45,13 @@ namespace DIO.Series
                         retornarMenuPrincipal();
                         break;
                     case "3":
-
+                        updateSerie();
                         retornarMenuPrincipal();
                         break;
                     case "4":
-
                         retornarMenuPrincipal();
                         break;
                     case "5":
-
                         retornarMenuPrincipal();
                         break;
                     default:
@@ -124,6 +123,7 @@ namespace DIO.Series
         }
 
         private static void insertSerie()
+
         {
             int insertedGender = 0;
             string insertedTitle = "";
@@ -235,10 +235,154 @@ namespace DIO.Series
             }
 
             Console.WriteLine("");
-            Console.WriteLine("   ------------------------------"); ;
+            Console.WriteLine("   ------------------------------");
             Console.WriteLine("   | Série incluída com sucesso |");
             Console.WriteLine("   ------------------------------");
 
         }
+
+        private static void updateSerie()
+
+        {
+            int insertedId = -1;
+            int insertedGender = 0;
+            string insertedTitle = "";
+            int insertedYear = 0;
+            string insertedDescription = "";
+
+
+            Console.Clear();
+            Console.WriteLine("");
+            Console.WriteLine("Opção 3 - Atualizar série");
+            Console.WriteLine("");
+
+            do
+            {
+                Console.WriteLine("");
+                Console.WriteLine("");
+                Console.WriteLine("Informe o id da série que deseja atualizar.");
+                Console.Write("--> ");
+
+                int.TryParse(Console.ReadLine(), out insertedId);
+
+                if (insertedId < 0 || insertedId > repository.NextId() - 1)
+                {
+                    insertedId = -1;
+
+                    Console.WriteLine("");
+                    Console.WriteLine("");
+                    Console.WriteLine("ATENÇÃO: ID não localizado!");
+                    return;
+                }
+
+            } while (insertedId == -1);
+
+            Console.WriteLine("");
+            Console.WriteLine("");
+            foreach (int i in Enum.GetValues(typeof(Gender)))
+            {
+                Console.WriteLine("{0} - {1}", i, Enum.GetName(typeof(Gender), i));
+            }
+
+            do
+            {
+                Console.WriteLine("");
+                Console.WriteLine("");
+                Console.WriteLine("Informe o número do gênero da série.");
+                Console.Write("--> ");
+
+                int.TryParse(Console.ReadLine(), out insertedGender);
+
+                if (insertedGender < 0 || insertedGender > Enum.GetNames(typeof(Gender)).Length)
+                {
+                    insertedGender = 0;
+
+                    Console.WriteLine("");
+                    Console.WriteLine("");
+                    Console.WriteLine("ATENÇÃO: Informe um gênero válido!");
+                }
+
+            } while (insertedGender == 0);
+
+            do
+            {
+                Console.WriteLine("");
+                Console.WriteLine("");
+                Console.WriteLine("Informe o título da série.");
+                Console.Write("--> ");
+                insertedTitle = Console.ReadLine();
+
+                if (insertedTitle.Equals(""))
+                {
+                    insertedTitle = "";
+
+                    Console.WriteLine("");
+                    Console.WriteLine("");
+                    Console.WriteLine("ATENÇÃO: O título não pode ser em branco!");
+                }
+
+            } while (insertedTitle.Equals(""));
+
+            do
+            {
+                Console.WriteLine("");
+                Console.WriteLine("");
+                Console.WriteLine("Informe o ano de início da série com 4 dígitos.");
+                Console.Write("--> ");
+
+                int.TryParse(Console.ReadLine(), out insertedYear);
+
+                if (insertedYear.ToString().Length != 4)
+                {
+                    insertedYear = 0;
+
+                    Console.WriteLine("");
+                    Console.WriteLine("");
+                    Console.WriteLine("ATENÇÃO: Informe o ano com 4 dígitos!");
+                }
+
+            } while (insertedYear == 0);
+
+            do
+            {
+                Console.WriteLine("");
+                Console.WriteLine("");
+                Console.WriteLine("Informe a descrição da série.");
+                Console.Write("--> ");
+                insertedDescription = Console.ReadLine();
+
+                if (insertedDescription.Equals(""))
+                {
+                    insertedDescription = "";
+
+                    Console.WriteLine("");
+                    Console.WriteLine("");
+                    Console.WriteLine("ATENÇÃO: A descrição não pode ser em branco!");
+                }
+
+            } while (insertedDescription.Equals(""));
+
+            Serie updatedSerie = new Serie(id: insertedId,
+                                       gender: (Gender)insertedGender,
+                                       title: insertedTitle,
+                                       year: insertedYear,
+                                       description: insertedDescription);
+
+            try
+            {
+                repository.Update(insertedId, updatedSerie);
+            }
+            catch (System.Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+            Console.WriteLine("");
+            Console.WriteLine("   --------------------------------");
+            Console.WriteLine("   | Série atualizada com sucesso |");
+            Console.WriteLine("   --------------------------------");
+
+        }
+
     }
 }
