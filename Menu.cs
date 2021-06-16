@@ -49,6 +49,7 @@ namespace DIO.Series
                         retornarMenuPrincipal();
                         break;
                     case "4":
+                        deleteSerie();
                         retornarMenuPrincipal();
                         break;
                     case "5":
@@ -384,5 +385,75 @@ namespace DIO.Series
 
         }
 
+        private static void deleteSerie()
+        {
+            int insertedId = -1;
+
+
+            Console.Clear();
+            Console.WriteLine("");
+            Console.WriteLine("Opção 4 - Atualizar série");
+            Console.WriteLine("");
+
+            do
+            {
+                Console.WriteLine("");
+                Console.WriteLine("");
+                Console.WriteLine("Informe o id da série que deseja excluir.");
+                Console.Write("--> ");
+
+                int.TryParse(Console.ReadLine(), out insertedId);
+
+
+                if (insertedId < 0 || insertedId > repository.NextId() - 1 || repository.GetSerieById(insertedId).returnStatus())
+                {
+                    insertedId = -1;
+
+                    Console.WriteLine("");
+                    Console.WriteLine("");
+                    Console.WriteLine("ATENÇÃO: ID não localizado!");
+                    return;
+                }
+
+            } while (insertedId == -1);
+
+            string confirmDelete = "";
+
+            do
+            {
+                Console.WriteLine("");
+                Console.WriteLine("ATENÇÃO: Deseja mesmo excluír esta série? 1 - SIM | 2 - NÃO");
+                Console.Write("--> ");
+                confirmDelete = Console.ReadLine();
+
+                switch (confirmDelete)
+                {
+                    case "1":
+                        try
+                        {
+                            repository.Delete(insertedId);
+                        }
+                        catch (System.Exception e)
+                        {
+                            throw new Exception(e.Message);
+                        }
+
+                        Console.WriteLine("");
+                        Console.WriteLine("   ------------------------------");
+                        Console.WriteLine("   | Série excluída com sucesso |");
+                        Console.WriteLine("   ------------------------------");
+
+                        break;
+                    case "2":
+                        Console.WriteLine("");
+                        Console.WriteLine("Operação cancelada!");
+                        break;
+
+                    default:
+                        confirmDelete = "";
+                        break;
+                }
+            } while (confirmDelete.Equals(""));
+        }
     }
 }
