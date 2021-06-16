@@ -53,6 +53,7 @@ namespace DIO.Series
                         retornarMenuPrincipal();
                         break;
                     case "5":
+                        viewSerie();
                         retornarMenuPrincipal();
                         break;
                     default:
@@ -454,6 +455,51 @@ namespace DIO.Series
                         break;
                 }
             } while (confirmDelete.Equals(""));
+        }
+
+        private static void viewSerie()
+        {
+            int insertedId = -1;
+
+
+            Console.Clear();
+            Console.WriteLine("");
+            Console.WriteLine("Opção 5 - Visualizar série");
+            Console.WriteLine("");
+
+            do
+            {
+                Console.WriteLine("");
+                Console.WriteLine("");
+                Console.WriteLine("Informe o id da série que deseja visualizar.");
+                Console.Write("--> ");
+
+                int.TryParse(Console.ReadLine(), out insertedId);
+
+                if (insertedId < 0 || insertedId > repository.NextId() - 1)
+                {
+                    insertedId = -1;
+
+                    Console.WriteLine("");
+                    Console.WriteLine("");
+                    Console.WriteLine("ATENÇÃO: ID não localizado!");
+                    return;
+                }
+
+            } while (insertedId == -1);
+
+            try
+            {
+                var serie = repository.GetSerieById(insertedId);
+
+                Console.WriteLine("");
+                Console.WriteLine("");
+                Console.WriteLine(serie);
+            }
+            catch (System.Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
     }
 }
